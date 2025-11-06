@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ subject }}</title>
+
+  <style>
+    /* Reset and base */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: #f4f6f8;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #333333;
+    }
+
+    .email-wrapper {
+      width: 100%;
+      padding: 40px 0;
+      background-color: #f4f6f8;
+    }
+
+    .email-container {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* Header */
+    .email-header {
+      background-color: #0d6efd;
+      color: #ffffff;
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* Body */
+    .email-body {
+      padding: 36px 32px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .email-body h2 {
+      color: #0d6efd;
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .email-body p {
+      margin-bottom: 20px;
+      color: #444444;
+    }
+
+    /* Button */
+    .button {
+      display: inline-block;
+      background-color: #0d6efd;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      transition: background 0.2s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #0b5ed7;
+    }
+
+    /* Footer */
+    .email-footer {
+      background-color: #f9fafb;
+      padding: 24px 32px;
+      font-size: 13px;
+      color: #6c757d;
+      text-align: center;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .email-footer a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    .email-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile adjustments */
+    @media only screen and (max-width: 600px) {
+      .email-container {
+        margin: 0 10px;
+      }
+      .email-body, .email-header, .email-footer {
+        padding: 20px;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+      <!-- Header -->
+      <div class="email-header">
+        {{ header|default:"Notification" }}
+      </div>
+
+      <!-- Body -->
+      <div class="email-body">
+        <h2>{{ subject }}</h2>
+        <p>{{ message|safe }}</p>
+
+        {% if action_url %}
+        <div style="text-align: center; margin-top: 25px;">
+          <a href="{{ action_url }}" class="button">
+            {{ action_text|default:"View Details" }}
+          </a>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Footer -->
+      <div class="email-footer">
+        <p>This email was sent automatically from 
+          <strong>{{ system_name|default:"Our System" }}</strong>.
+        </p>
+        <p>Need help? Contact 
+          <a href="mailto:{{ support_email|default:'support@example.com' }}">
+            {{ support_email|default:"support@example.com" }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
